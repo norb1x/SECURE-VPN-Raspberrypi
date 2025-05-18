@@ -75,7 +75,7 @@ This private key is unique to your client and must be kept secret. It is used to
 ## Other important files you will encounter:
 
 server.crt / server.key — The server’s certificate and private key, used to identify and authenticate the VPN server.
-ta.key — TLS authentication key, an additional security layer to prevent unauthorized connectio
+ta.key — TLS authentication key, an additional security layer to prevent unauthorized connection
 
 
 ## License 
