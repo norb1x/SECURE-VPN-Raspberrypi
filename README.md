@@ -69,23 +69,6 @@ verb 3
 ## Explanation of Certificates and Keys
 When setting up OpenVPN, you will see configuration sections like this in your client .ovpn file:
 
-'''conf
-
-<ca>
-#Insert your CA certificate here
-</ca>
-
-<cert>
-#Insert your client certificate here
-</cert>
-
-<key>
-#Insert your client key here
-</key>
-'''
-
-!!! Here is what these parts mean:
-
 <ca> — This section contains the CA certificate (ca.crt).
 The Certificate Authority (CA) is the trusted entity that signs and verifies all certificates. This certificate helps your client verify the VPN server’s identity.
 Important: The CA certificate is the same for all clients because it is the root of trust for your VPN network.
