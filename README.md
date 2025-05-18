@@ -37,9 +37,6 @@ Use .gitignore to exclude sensitive files.
 
 Always keep your Raspberry Pi updated for security patches.
 
-## License
-This project is for educational purposes. Use at your own risk.
-
 ## Client Configuration Example
 Replace placeholders with your actual server IP and certificates before use:
 
@@ -67,3 +64,7 @@ verb 3
 <key>
 # Insert your client key here
 </key>
+```
+
+## License 
+This project is for educational purposes. Use at your own risk.
