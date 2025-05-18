@@ -66,5 +66,40 @@ verb 3
 </key>
 ```
 
+## Explanation of Certificates and Keys
+When setting up OpenVPN, you will see configuration sections like this in your client .ovpn file:
+''
+conf
+<ca>
+#Insert your CA certificate here
+</ca>
+
+<cert>
+#Insert your client certificate here
+</cert>
+
+<key>
+#Insert your client key here
+</key>
+Here is what these parts mean:
+''
+<ca> — This section contains the CA certificate (ca.crt).
+The Certificate Authority (CA) is the trusted entity that signs and verifies all certificates. This certificate helps your client verify the VPN server’s identity.
+Important: The CA certificate is the same for all clients because it is the root of trust for your VPN network.
+
+<cert> — This section contains the client certificate (client.crt).
+This certificate identifies your client device and proves its identity to the VPN server.
+Each client has a unique client certificate to distinguish it from others.
+
+<key> — This section contains the client private key (client.key).
+This private key is unique to your client and must be kept secret. It is used to establish secure encrypted communication with the server.
+
+## Other important files you will encounter:
+
+server.crt / server.key — The server’s certificate and private key, used to identify and authenticate the VPN server.
+
+ta.key — TLS authentication key, an additional security layer to prevent unauthorized connectio
+
+
 ## License 
 This project is for educational purposes. Use at your own risk.
