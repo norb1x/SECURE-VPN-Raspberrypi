@@ -10,14 +10,15 @@ sudo apt install openvpn easy-rsa -y
 ```
 ## Step 2: Configure Easy-RSA and Generate Keys
 
-make-cadir ~/openvpn-ca
-cd ~/openvpn-ca
-./easyrsa init-pki
-./easyrsa build-ca nopass
-./easyrsa gen-req server nopass
-./easyrsa sign-req server server
-./easyrsa gen-dh
-openvpn --genkey --secret ta.key
+# make-cadir ~/openvpn-ca
+# cd ~/openvpn-ca
+# ./easyrsa init-pki
+# ./easyrsa build-ca nopass
+# ./easyrsa gen-req server nopass
+# ./easyrsa sign-req server server
+# ./easyrsa gen-dh
+# openvpn --genkey --secret ta.key
+
 
 ## Step 3: Configure OpenVPN Server
 
@@ -41,8 +42,9 @@ verb 3
 ```
 
 ## Step 4: Start OpenVPN Server
-sudo systemctl start openvpn@server
-sudo systemctl enable openvpn@server
+
+# sudo systemctl start openvpn@server
+# sudo systemctl enable openvpn@server
 
 ## Step 5: Create Client Configuration
 
