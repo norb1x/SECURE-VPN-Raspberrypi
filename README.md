@@ -1,28 +1,33 @@
-# VPN Project - OpenVPN Setup on Raspberry Pi
+# Raspberry Pi OpenVPN Project
 
-This project demonstrates how to set up an OpenVPN server and client configuration on a Raspberry Pi for secure remote access.
+This project demonstrates how to set up a secure OpenVPN server on a Raspberry Pi, enabling encrypted remote access to your home or private network.
+
+---
 
 ## Project Overview
 
-- **OpenVPN Server** runs on a Raspberry Pi.
-- Clients connect securely using certificates and keys.
-- VPN allows safe access to your local network from anywhere.
+- **OpenVPN server** runs on a Raspberry Pi device.  
+- Clients connect securely using certificates and keys.  
+- VPN provides safe access to your local network from anywhere, protecting data privacy and security.
 
-## Files in this Repository
+---
 
-- `client.ovpn` - Example OpenVPN client configuration file (without actual certificates/keys).
-- `README.md` - This file with project info and setup instructions.
+## Repository Contents
 
-## How to Use the Client Configuration
+- `client.ovpn` – Example OpenVPN client configuration file (without real certificates and keys for security).  
+- `README.md` – This file with project description and setup instructions.
 
-Below is an example of the client config file (`client.ovpn`).  
-Replace placeholders with your actual server IP address and your real certificates and keys.
+---
+
+## Client Configuration Example
+
+Replace placeholders with your actual server IP and certificates before use:
 
 ```conf
 client
 dev tun
 proto udp
-remote YOUR_SERVER_IP 1194            # Replace YOUR_SERVER_IP with your VPN server IP address
+remote YOUR_SERVER_IP 1194            # Replace with your VPN server IP address
 resolv-retry infinite
 nobind
 persist-key
