@@ -68,8 +68,9 @@ verb 3
 
 ## Explanation of Certificates and Keys
 When setting up OpenVPN, you will see configuration sections like this in your client .ovpn file:
-'''
-conf
+
+'''conf
+
 <ca>
 #Insert your CA certificate here
 </ca>
@@ -81,6 +82,7 @@ conf
 <key>
 #Insert your client key here
 </key>
+'''
 
 !!! Here is what these parts mean:
 
