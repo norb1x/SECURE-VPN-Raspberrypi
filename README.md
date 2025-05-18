@@ -17,26 +17,6 @@ This project demonstrates how to set up a secure OpenVPN server on a Raspberry P
 - `client.ovpn` – Example OpenVPN client configuration file (without real certificates and keys for security).  
 - `README.md` – This file with project description and setup instructions.
 
----
-
-## Setup Instructions
-Set up the OpenVPN server on your Raspberry Pi (see external tutorial or project guide).
-
-Generate certificates and keys securely using EasyRSA or a similar tool.
-
-Configure your client by replacing placeholders in client.ovpn with your certificates and server IP.
-
-Connect to VPN using an OpenVPN client application.
-
-Test the connection by pinging devices on your private network or checking your IP address.
-
-Security Notes
-Never commit real private keys or certificates to public repositories.
-
-Use .gitignore to exclude sensitive files.
-
-Always keep your Raspberry Pi updated for security patches.
-
 ## Client Configuration Example
 Replace placeholders with your actual server IP and certificates before use:
 
