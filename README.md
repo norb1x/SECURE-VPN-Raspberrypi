@@ -47,3 +47,25 @@ verb 3
 <key>
 # Insert your client key here
 </key>
+
+
+Setup Instructions
+Set up the OpenVPN server on your Raspberry Pi (see external tutorial or project guide).
+
+Generate certificates and keys securely using EasyRSA or a similar tool.
+
+Configure your client by replacing placeholders in client.ovpn with your certificates and server IP.
+
+Connect to VPN using an OpenVPN client application.
+
+Test the connection by pinging devices on your private network or checking your IP address.
+
+Security Notes
+Never commit real private keys or certificates to public repositories.
+
+Use .gitignore to exclude sensitive files.
+
+Always keep your Raspberry Pi updated for security patches.
+
+## License
+This project is for educational purposes. Use at your own risk.
