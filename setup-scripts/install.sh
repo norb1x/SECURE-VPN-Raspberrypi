@@ -5,44 +5,82 @@
 # Author: norb1x
 # Description:
 #   This script installs OpenVPN and sets up
-#   all the certificate infrastructure needed
-#   to run a working and secure VPN server.
+#   all required certificates, config, and copies
+#   them to /etc/openvpn automatically.
 # ------------------------------------------
 
-# 1. Update system and install OpenVPN + Easy-RSA (used for key generation)
 echo "🔄 Updating system and installing OpenVPN + Easy-RSA..."
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y openvpn easy-rsa
 
-# 2. Create a working directory for certificates
-echo "📁 Creating working directory for certificates (~/openvpn-ca)..."
+# 1. Create a directory for Easy-RSA (used to generate certs)
+echo "📁 Creating Easy-RSA working directory..."
 make-cadir ~/openvpn-ca
 cd ~/openvpn-ca
 
-# 3. Initialize the Public Key Infrastructure (PKI)
+# 2. Initialize PKI and generate certificates
 echo "🛠️ Initializing PKI..."
 ./easyrsa init-pki
 
-# 4. Build the Certificate Authority (CA) – signs all other certs
-echo "🔐 Creating Certificate Authority (CA)..."
+echo "🔐 Building Certificate Authority (CA)..."
 ./easyrsa build-ca nopass
 
-# 5. Generate certificate request for the VPN server
 echo "📄 Creating server certificate request..."
 ./easyrsa gen-req server nopass
 
-# 6. Sign the server certificate with your CA
-echo "✅ Signing server certificate with CA..."
+echo "✅ Signing the server certificate..."
 ./easyrsa sign-req server server
 
-# 7. Generate Diffie-Hellman parameters (for key exchange)
 echo "🔑 Generating Diffie-Hellman parameters..."
 ./easyrsa gen-dh
 
-# 8. Generate a static TLS key for extra security
 echo "🔒 Generating static TLS key..."
 openvpn --genkey --secret ta.key
 
-# 9. Done!
-echo "✅ Setup complete! Your VPN certificates and keys are ready."
-echo "👉 Next step: Copy them to /etc/openvpn/ and configure server.conf"
+# 3. Copy all certs and keys to /etc/openvpn
+echo "📦 Copying certs and keys to /etc/openvpn..."
+sudo cp pki/ca.crt pki/issued/server.crt pki/private/server.key pki/dh.pem ta.key /etc/openvpn/
+
+# 4. Create a sample OpenVPN server config file
+echo "📝 Creating server.conf..."
+sudo tee /etc/openvpn/server.conf > /dev/null <<EOF
+port 1194
+proto udp
+dev tun
+ca ca.crt
+cert server.crt
+key server.key
+dh dh.pem
+tls-auth ta.key 0
+cipher AES-256-CBC
+keepalive 10 120
+persist-key
+persist-tun
+status openvpn-status.log
+verb 3
+EOF
+
+# 5. Enable and start OpenVPN
+echo "🚀 Enabling and starting OpenVPN server..."
+sudo systemctl enable openvpn@server
+sudo systemctl start openvpn@server
+
+# 6. Final message
+echo "✅ VPN server setup complete!"
+echo "📌 You can now create client certificates using Easy-RSA."
+echo "📌 Make sure port 1194 UDP is open on your router/firewall."
+
+
+#🧾 How to use
+#Save this file as setup-openvpn.sh
+#Make it executable:
+#bash
+#chmod +x setup-openvpn.sh
+#Run the script:
+#bash
+#./setup-openvpn.sh
+#That’s it — OpenVPN will be installed, configured, and running on your Raspberry Pi.
+#✅ You can now...
+#Generate client keys (manually or via another script).
+#Transfer the .ovpn config to client devices.
+#Use the VPN safely via UDP port 1194.
