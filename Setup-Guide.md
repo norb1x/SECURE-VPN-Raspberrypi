@@ -45,7 +45,7 @@ verb 3
 
 # sudo systemctl start openvpn@server
 # sudo systemctl enable openvpn@server
-
+# you can also check it with sudo systemctl status openvpn@server if it's running
 ## Step 5: Create Client Configuration
 
 Sample client file client.ovpn:
